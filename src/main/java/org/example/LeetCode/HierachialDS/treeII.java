@@ -363,6 +363,115 @@ public class treeII {
 
     }
 
+    public static int minDepth(Node root) {
+
+        Queue<Node> queue = new LinkedList<>();
+        queue.add(root);
+        int d=1;
+        while(!queue.isEmpty()){
+            int s = queue.size();
+            while(s-->0){ // (s>0) { s--}
+                Node q = queue.poll();
+                if(q.left!=null) queue.offer(q.left);
+                if(q.right!=null) queue.offer(q.right);
+                if(q.left==null && q.right==null) return d;
+            }
+            d++;
+        }
+        return d;
+
+
+    }
+
+
+    /// avg of node vals in each level
+    public static List<Double> averageOfLevels(Node root) {
+        Queue<Node> queue = new LinkedList<>();
+        List<Double> list = new ArrayList<>();
+        queue.add(root);
+        list.add((double)root.data);
+        while(!queue.isEmpty()){
+            int len =  queue.size();
+            double avg = 0,sum=0;
+            for(int i=0;i<len;i++){
+
+                Node node = queue.poll();
+                if(node.left!=null) queue.add(node.left);
+                if(node.right!=null) queue.add(node.right);
+
+                sum += node.data;
+
+
+            }
+            avg = sum/len;
+            list.add(avg);
+        }
+        return list;
+
+    }
+
+
+    /// count all nodes
+    public static int countNodes(Node root) {
+
+        if(root==null) return 0;
+
+        List<Integer> ls = new ArrayList<>();
+        preOrder(root,ls);
+
+        return ls.size();
+
+    }
+
+    public static void preOrder(Node root,List<Integer> ls){
+        if(root==null) return;
+        ls.add(root.data);
+        preOrder(root.left,ls);
+        preOrder(root.right,ls);
+    }
+
+    public static int sumNumbers(Node root) {
+
+        List<Integer> ls = new ArrayList<>();
+        StringBuilder sb = new StringBuilder();
+        rootToLeaf(root,ls,sb);
+        int res=0;
+
+        for(int n : ls){
+            res += n;
+        }
+        return res;
+
+
+    }
+
+    /// return sum of roottoleaf path - 1->3->5 - 135
+    public static void rootToLeaf(Node root,List<Integer> ls,StringBuilder path){
+
+        if(root==null) return;
+
+        int len = path.length();
+
+        path.append(root.data);
+
+        if(isLeafNode(root)){
+            String s = path.toString();
+            ls.add(Integer.parseInt(s));
+
+        }
+        else {
+            rootToLeaf(root.left,ls,path);
+            rootToLeaf(root.right,ls,path);
+        }
+
+        path.setLength(len);//while backtracking..will have to remove the node
+
+        System.out.println("ls.."+ls);
+
+    }
+
+
+
 
 
     public static void main(String[] args) {
@@ -386,7 +495,7 @@ public class treeII {
         root.left.left = new Node(5);
         root.left.right = new Node(3);
 
-        root.right.right = new Node(9);
+       // root.right.right = new Node(9);
 
 
         //invertTreeOdd(root);
@@ -394,7 +503,11 @@ public class treeII {
         //System.out.println(isSymmetric(root));
        // System.out.println((lowestCommonAncestor(root,root.right.left,root.right.left.left )).data);
         //System.out.println(topView(root));
-        System.out.println(widthOfBinaryTree(root));
+        //System.out.println(widthOfBinaryTree(root));
+        //System.out.println(minDepth(root));
+        //System.out.println(averageOfLevels(root));
+        //System.out.println(countNodes(root));
+        System.out.println(sumNumbers(root));
 
 
 

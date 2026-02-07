@@ -54,7 +54,7 @@ public class palindrome {
 
 
     public static void main(String[] args) {
-        System.out.println(isPalindrome(100021));
-        System.out.println(validPalindrome("race a car"));
+        System.out.println(isPalindrome(121));
+        System.out.println(validPalindrome("Dammit I'm mad"));
     }
 }

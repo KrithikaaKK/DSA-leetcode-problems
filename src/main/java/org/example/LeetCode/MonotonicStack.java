@@ -36,24 +36,26 @@ public class MonotonicStack {
     //for last element return greater from start of array --- circular
     public static int[] nextGreaterElementII (int[] nums) {
         Stack<Integer> stack = new Stack<>();
-        int[] res = new int[nums.length];
-        Arrays.fill(res,-1);
         int n = nums.length;
-        for(int i = 2*n -1;i>=0;i--) { // circular array
-            int curr = nums[i % n]; // to get the bounded index
 
-            while(!stack.isEmpty() && stack.peek()<=curr){
+        for(int i=n-1;i>=0;i--){
+            stack.push(nums[i]);
+        }
+
+        for(int i=n-1;i>=0;i--){
+            int m = nums[i];
+
+            while(!stack.isEmpty()&& stack.peek()<=m){
                 stack.pop();
             }
 
-            // left for first traversal , record values from second
-            if(i<n && !stack.isEmpty()){
-                res[i] = stack.peek();
-            }
-            stack.push(curr);
-        }
-        return res;
+            nums[i] = (!stack.isEmpty()) ? stack.peek() : -1;
 
+            stack.push(m);
+
+        }
+
+        return nums;
 
     }
 
@@ -109,7 +111,7 @@ public class MonotonicStack {
       //  System.out.println(Arrays.toString(nextGreaterElement(new int[]{4, 1, 2}, new int[]{1, 3, 4, 2})));
       //  System.out.println(Arrays.toString(dailyTemperature(new int[]{73,74,75,71,69,72,76,73})));
 //        System.out.println(largestRectangle(new int[]{2,4}));
-       // System.out.println(Arrays.toString(nextGreaterElementII(new int[]{2,1,3,5,4})));
+        System.out.println(Arrays.toString(nextGreaterElementII(new int[]{2,1,3,5,4})));
 
     }
 

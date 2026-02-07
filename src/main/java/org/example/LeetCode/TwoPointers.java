@@ -177,6 +177,22 @@ public class TwoPointers {
         return res;
     }
 
+    public static int maxProfit(int[] prices) {
+        int buy =prices[0],profit = 0;
+
+        for(int i=0;i<prices.length;i++){
+            if(buy>prices[i]){
+                buy = prices[i];
+            }
+            else if(prices[i]-buy > profit ){
+                profit = prices[i] - buy;
+            }
+
+        }
+        return profit;
+
+    }
+
 
 
     public static void main(String[] args) {
@@ -187,6 +203,8 @@ public class TwoPointers {
         //System.out.println(findPivotElement(new int[]{2,-1,1}));
         //System.out.println(findMaxConsecutiveOnes(new int[]{1,1,1,0,1,1}));
         //System.out.println(majorityElement(new int[]{3,2,3}));
-        System.out.println(majorityElementNByThree(new int[]{1,2}));
+        //System.out.println(majorityElementNByThree(new int[]{1,2}));
+
+        System.out.println(maxProfit(new int[]{7,1,5,3,6,4}));
     }
 }

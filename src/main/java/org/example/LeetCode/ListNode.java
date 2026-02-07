@@ -95,6 +95,7 @@ public class ListNode {
              curr = next;
              count++;
          }
+         //Imp
          leftPrev.next = subPrev;
          subTail.next  = curr;
 
@@ -359,6 +360,69 @@ public class ListNode {
 
      }
 
+     ///Imp..
+     public static ListNode reverseKGroup(ListNode head,int k){
+
+         ListNode temp = head;
+         ListNode prevLast = null;
+
+         while(temp!=null){
+
+             ListNode kNode = getKthNode(temp,k);
+
+             if(kNode==null){
+                 prevLast.next = temp;
+
+                 break;
+             }
+
+             ListNode nextNode = kNode.next;
+
+             kNode.next = null;
+             reverseList(temp);
+
+             if(temp==head){
+                 temp = kNode;
+             }else {
+                 prevLast.next = kNode;
+             }
+
+             prevLast = temp;
+
+             temp = nextNode;
+
+
+
+         }
+
+         return head;
+
+     }
+
+     public static ListNode getKthNode(ListNode temp,int k){
+         k -= 1;
+
+         while(temp!=null && k>0){
+             temp = temp.next;
+             k--;
+         }
+         return temp;
+
+     }
+
+
+
+
+
+     public static void printLinkedList(ListNode head) {
+         ListNode temp = head;
+         while (temp != null) {
+             System.out.print(temp.val + " ");
+             temp = temp.next;
+         }
+         System.out.println();
+     }
+
 
 
 
@@ -368,6 +432,24 @@ public class ListNode {
          //System.out.println(reverseList());
          //System.out.println(convertArray());
          System.out.println(lengthOfLL(convertArray()));
+
+             ListNode head = new ListNode(5);
+             head.next = new ListNode(4);
+             head.next.next = new ListNode(3);
+             head.next.next.next = new ListNode(7);
+             head.next.next.next.next = new ListNode(9);
+             head.next.next.next.next.next = new ListNode(2);
+
+             // Print the original linked list
+             System.out.print("Original Linked List: ");
+             printLinkedList(head);
+
+             // Reverse the linked list in groups of K
+             head = reverseKGroup(head, 3);
+
+             // Print the reversed linked list
+             System.out.print("Reversed Linked List: ");
+             printLinkedList(head);
 
      }
 

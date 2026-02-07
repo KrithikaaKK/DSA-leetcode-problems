@@ -4,6 +4,9 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
 import java.io.IOException;
+ class tes {
+
+     void print() {
 
 //public class tes {
 //
@@ -19,3 +22,5 @@ import java.io.IOException;
 //
 //    }
 //}
+     }
+ }

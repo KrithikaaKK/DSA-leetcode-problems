@@ -37,6 +37,7 @@ class tree {
 
     public static List<List<Integer>> levelOrder(Node root) {
         List<List<Integer>> res = new LinkedList<>();
+        List<List<Integer>> lists = new LinkedList<>();
         Queue<Node> queue = new LinkedList<Node>(); //FIFO
         if(root==null) return res;
         int depth = 0;
@@ -52,6 +53,9 @@ class tree {
             }
             depth++;
             res.add(list);
+        }
+        for(int i=res.size();i<0;i--){
+            lists.add(res.get(i));
         }
         System.out.println("depth.."+depth);
         return res;
@@ -94,8 +98,17 @@ class tree {
             }
 
         }
+
+
+
+
         return res;
+
+
+
     }
+
+
 
     private static List<Integer> iterativePostOrder(Node root) {
         List<Integer> result = new LinkedList<>();
@@ -188,15 +201,7 @@ class tree {
     /// check if two trees are identical
     /// pre order
     /// first check the root after left then right
-    public static boolean isSameTree(Node p, Node q) {
 
-        if(p==null || q==null) {
-            return (p==q);
-        }
-        return (p.data==q.data)&& isSameTree(p.left,q.left) && isSameTree(p.right,q.right);
-
-
-    }
 
 
     /// levelorder traversal but with a flag
@@ -236,6 +241,7 @@ class tree {
 //    public static int distance(Node root,Node p,Node q){
 //
 //    }
+
 
 
 

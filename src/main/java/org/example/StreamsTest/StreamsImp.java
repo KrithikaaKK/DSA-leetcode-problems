@@ -23,9 +23,10 @@ public class StreamsImp {
         List<People> peoples = List.of(new People("jaanu",20),
                                        new People("ram",21),
                                         new People("selvi",23));
-        OptionalDouble avg = peoples.stream()
+        OptionalInt max = peoples.stream()
                 .mapToInt(People::age) // map -> intstream
-                .average();
+                .max();
+
 
         //to remove duplicates hashset is used
        List<String> names =  employees.stream().filter(employee -> new HashSet<>(employee.skills).containsAll(skillsReq))
@@ -43,9 +44,27 @@ public class StreamsImp {
        Optional<String> name =  list.stream().max(Comparator.comparingInt(String::length));
         System.out.println("name having greater length: "+name);
 
-        // to count the frequency of each words
 
 
+
+
+
+    }
+
+    public static void streamsEx(){
+
+        // to count the frequency of each character in a string
+        String s = "krithikaa";
+
+        Map<Character,Long> map = s.chars()
+                .mapToObj(c -> (char)c)//map to the respective char
+                .collect(Collectors.groupingBy(
+                        c -> c,
+                        Collectors.counting()
+                ));
+
+
+        System.out.println(map);
     }
 
     public  static void main(String[] args) {
@@ -58,13 +77,20 @@ public class StreamsImp {
 
 
 
+
+
+
+
+
+
+
         names.stream().sorted(Comparator.reverseOrder()).peek(System.out::println).collect(Collectors.toList());
         List<Integer> nums = List.of(1,4,3,5,6);
         List<List<String>> nams = Arrays.asList(Arrays.asList("hii","bii"),Arrays.asList("bii","hye"));
         nams.stream().flatMap(Collection::stream).map(String::length).forEach(System.out::println);
 
 
-        nums.stream().sorted(Comparator.reverseOrder()).forEach(System.out::println);
+        nums.stream().sorted(Comparator.reverseOrder()).peek(System.out::println);
         //needs a terminal to trigger the pipeline
         List<String> namess = names.stream().filter(d->d.startsWith("s")).peek(d->System.out.println("starts with s "+s)).toList();
 

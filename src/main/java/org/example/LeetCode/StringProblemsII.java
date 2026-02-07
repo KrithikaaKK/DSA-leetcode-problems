@@ -189,6 +189,23 @@ public class StringProblemsII {
         chars[right] = temp;
     }
 
+    /// s - abc , t - ahbc -- true -- order preserved all elements present
+    public static boolean isSubsequence(String s, String t) {
+
+        int i=0,j=0,count=s.length();
+        while(i<s.length() && j<t.length()){
+            if(s.charAt(i)==t.charAt(j)){
+                i++;
+                j++;
+                count--;
+            }else {
+                j++;
+            }
+
+        }
+        return count==0;
+    }
+
 
 
     public static void main(String[] args) {
@@ -199,6 +216,7 @@ public class StringProblemsII {
         //System.out.println(isIsomorphic("bbbaaaba","aaabbbba"));
        // System.out.println(wordPattern("abbac","dog cat cat dog dog"));
         //System.out.println(minOperationOptimized("sta"));
-        System.out.println(reverseVowels("race a car"));
+        //System.out.println(reverseVowels("race a car"));
+        System.out.println(isSubsequence("abc","ahbdef"));
     }
 }

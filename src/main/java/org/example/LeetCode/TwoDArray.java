@@ -1,6 +1,8 @@
 package org.example.LeetCode;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class TwoDArray {
 
@@ -78,18 +80,55 @@ public class TwoDArray {
 
     }
 
-    public static void main(String[] args) {
-        System.out.println(Arrays.deepToString(rotateImage(new int[][]{
+    public static List<Integer> spiralOrder(int[][] matrix) {
+       int[][] dirs = {{0,1},{1,0},{0,-1},{-1,0}};
 
-                {1, 3, 5},
-                {7, 9, 11},
-                {13, 15, 17}})));
+       List<Integer> list = new ArrayList<>();
+
+       int m = matrix.length;
+       int n = matrix[0].length;
+
+       boolean[][] visited =  new boolean[m][n];
+
+       int x=0,y=0;
+       int d=0;
+       for(int i=0;i<(m*n);i++){
+           list.add(matrix[x][y]);
+           visited[x][y] = true;
+
+           int nx = x+dirs[d][0];
+           int ny = y+dirs[d][1];
+
+           if(nx<0 || ny<0 || nx>=m || ny>=n||visited[nx][ny]) {
+               d = (d+1)%4;
+           }
+
+           x += dirs[d][0];
+           y += dirs[d][1];
+       }
+
+       return list;
+
+
+    }
+
+    public static void main(String[] args) {
+//        System.out.println(Arrays.deepToString(rotateImage(new int[][]{
+//
+//                {1, 3, 5},
+//                {7, 9, 11},
+//                {13, 15, 17}})));
 
         int m = 4, n = 6;
         int[][] guards = {{0,0}, {1,1}, {2,3}};
         int[][] walls = {{0,1}, {2,2}, {1,4}};
 
-        System.out.println(countUnguarded(m, n, guards, walls));
+        //System.out.println(countUnguarded(m, n, guards, walls));
+        System.out.println(spiralOrder(new int[][]{
+
+                {1, 3, 5},
+                {7, 9, 11},
+                {13, 15, 17}}));
 
 
     }
