@@ -234,6 +234,8 @@ public class ArrayProblemsII {
         return maxProd;
     }
 
+
+    /// [ 1,0,0,1,1,1] -- k =2 -- 6 --how to make it possible??
     public static int maxConsecOnes(int[] nums,int k) {
         int left=0,count=0,maxLen =0;
         for(int right=0;right<nums.length;right++) {
@@ -297,6 +299,8 @@ public class ArrayProblemsII {
 
 
 
+
+
     public static void main(String[] args) {
         //System.out.println(Arrays.toString(productExceptSelf(new int[]{9,6,0,1,0,3})));
         //System.out.println(Arrays.toString(nextPermutation(new int[]{1,3,2})));
@@ -306,7 +310,7 @@ public class ArrayProblemsII {
         //System.out.println(totalFruit(new int[]{3,3,3,1,2,1,1,2,3,3,4}));
         //System.out.println(longestConsecNums(new int[]{0,3,7,2,5,8,4,6,0,1}));
         //System.out.println(maxProduct(new int[]{2,3,-2,-7,4}));
-        System.out.println(maxConsecOnes(new int[]{1,1,1,0,0,0,1,1,1,1,0},2));
+        System.out.println(maxConsecOnes(new int[]{1,1,1,0,0,0,1,1,1,1,1,0},2));
         //System.out.println(Arrays.toString(finalPrices(new int[]{8, 4, 6, 2, 3})));
         //System.out.println(missingNumber(new int[]{9,6,4,2,3,5,7,0,1}));
 

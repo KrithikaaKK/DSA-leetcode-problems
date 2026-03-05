@@ -151,6 +151,92 @@ public class BsOnAnswer {
 
     }
 
+    /// ship all weights within minimum ship capacity -- within the days
+    ///[1,2,3,5,6,10] days - 2 --> return capacity
+    public static int shipWithinDDays(int[] weights, int days){
+
+        int max=0,sum=0;
+        for(int n: weights){
+            max = Math.max(max,n);
+            sum += n;
+        }
+
+        int low = max,high = sum ;
+        while(low<high){
+            int mid = low + (high-low)/2;
+
+            if(findTotalDays(weights,mid)<= days){
+                high = mid;
+            }
+            else {
+                low = mid +1;
+            }
+
+        }
+        return low;
+
+    }
+
+    public static int findTotalDays (int[] weights,int capacity) {
+       int days = 1;
+       int load = 0;
+       for(int num : weights) {
+           if(load + num > capacity){
+               days++;
+               load=0;
+           }
+           load += num;
+       }
+       return days;
+    }
+
+
+    /// minimum days required to make m bouquets with k flowers (adjacent positions)
+    /// [1,10,3,10,2] --> 3 --- > [*,_,*,_,*] --> 3 flowers
+    public static int minDays(int[] bloomDay, int m, int k) {
+
+        if((m*k) > bloomDay.length) return -1;
+        int min=Integer.MAX_VALUE,max = Integer.MIN_VALUE;
+
+        for(int day : bloomDay) {
+            min = Math.min(min,day);
+            max = Math.max(max,day);
+        }
+
+        int low = min,high = max;
+
+        while(low < high) {
+            int mid = low + (high-low)/2;
+            if(canMake(bloomDay,mid,k,m)){
+                high = mid;
+            }else {
+                low = mid+1;
+            }
+
+        }
+        return low;
+
+    }
+
+    public static boolean canMake(int[] bloomDay,int totalDay,int k,int m){
+        int count =0;
+        int bouquets= 0;
+
+        for(int n : bloomDay) {
+            if(n <= totalDay) {
+                count ++;
+            }
+            if(count==k){
+                bouquets++;
+                count=0;
+            }
+            else {
+                count=0;
+            }
+        }
+        return bouquets >= m;
+    }
+
 
     public static void main(String[] args) {
 //        System.out.println(KthSmallestElementInMatrix(new int[][]{
@@ -163,7 +249,8 @@ public class BsOnAnswer {
         //System.out.println(findKthNumber(3,3,5));
 
        // System.out.println(findMedianSortedArrays(new int[]{1,2},new int[]{3,4}));
-        System.out.println(minEatingSpeedOptimise(new int[]{30,11,23,4,20},10));
+        //System.out.println(minEatingSpeedOptimise(new int[]{30,11,23,4,20},10));
+        System.out.println(minDays(new int[]{1,10,3,10,2},3,1));
 
     }
 }

@@ -8,7 +8,11 @@ public class ArrayProblemsIII {
         int n =  nums.length;
         int len = n-1;
         k = k % n; //as rotation is cyclic we reduced it if k greater than length
+        ///k == 3 , 6 same  3 , 5 - > 3
         int count=k-1,c=0;
+        /// [1,2,3,4,5,6] - k 3 - [4,5,6,1,2,3] - k 6 -- > [2,3,4,5,6]
+
+        /// shift other element to right--while bringing the other to front
 
 
         for(int i=0;i<n;i++) {
@@ -27,6 +31,33 @@ public class ArrayProblemsIII {
         System.out.println(Arrays.toString(nums));
 
     }
+
+    /// optimized version of above - O(N) , O(1) space
+    public static void rotateKRight(int[] nums, int k){
+        int n =  nums.length;
+        k = k%n;
+
+        reverse(nums,0,n-1);
+        reverse(nums,0,k-1);
+        reverse(nums,k,n-1);
+
+        System.out.println(Arrays.toString(nums));
+
+
+    }
+
+    public static void reverse(int[] nums,int n1,int n2) {
+        int temp;
+        while(n1<n2) {
+           temp= nums[n2];
+           nums[n2] = nums[n1];
+           nums[n1] = temp;
+           n1++;
+           n2--;
+        }
+    }
+
+
 
     public static List<List<String>> groupAnagrams(String[] strs) {
         List<List<String>> result = new ArrayList<>();
@@ -158,6 +189,7 @@ public class ArrayProblemsIII {
 
     }
 
+    ///Imp
     public static boolean isValidSudoku(char[][] board) {
 
         int m = board.length;
@@ -210,12 +242,35 @@ public class ArrayProblemsIII {
         return false;
     }
 
+    /// return the number of moves req to make the array unique
+    /// in each move - increment only once
+    /// [1,2,2] -> [1,2,3] -> moves = 1
+    public static int minIncrementForUnique(int[] nums) {
+
+        int moves=0;
+
+        Arrays.sort(nums);
+
+        for(int i=1;i<nums.length;i++) {
+            if(nums[i-1]>=nums[i]){
+
+                moves += nums[i-1] - nums[i] + 1;
+                nums[i] = nums[i-1] + 1;
+
+            }
+        }
+        return moves;
+
+
+
+    }
+
 
 
 
 
     public static void main (String[] args) {
-        //rotate(new int[]{1,2,3,4,5},3);
+        rotateKRight(new int[]{1,2,3,4,5},3);
         //System.out.println(groupAnagrams(new String[]{"eat","ate","bat","nat","tan"}));
         //System.out.println(maximumSubarrayOp(new int[]{-2,1,-3,4,-1,2,1,-5,4}));
         //System.out.println(removeDuplicates(new int[]{1,1,1,2,2,3}));
@@ -234,7 +289,8 @@ public class ArrayProblemsIII {
 
         //System.out.println(isValidSudoku(board));
 
-        System.out.println(maxSubarraySumCircular(new int[]{5,-3,5}));
+        //System.out.println(maxSubarraySumCircular(new int[]{5,-3,5}));
+        //System.out.println(minIncrementForUnique(new int[]{3,2,1,2,1,7}));
 
 
     }

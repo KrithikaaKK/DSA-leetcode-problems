@@ -24,3 +24,25 @@ import java.io.IOException;
 //}
      }
  }
+
+interface A {
+    default void greet() {
+        System.out.println("Hello from A");
+    }
+}
+
+interface B {
+    default void greet() {
+        System.out.println("Hello from B");
+    }
+}
+
+class C implements A, B {
+    // ❌ Compiler error — which greet() to use?
+
+    @Override
+    public void greet(){
+        System.out.println("");
+      //  A.super.greet();
+    }
+}

@@ -58,7 +58,7 @@ public class LinkedListI {
         ListNode curr = head;
         ListNode temp = null;
         while(curr!=null) {
-            if(toRemove[curr.val]){
+            if(toRemove[curr.val]){ /// skip the desired element
                 temp=curr.next;
                 prev.next = curr.next;
                 curr=temp;
@@ -69,6 +69,26 @@ public class LinkedListI {
             }
         }
         return dummy.next;
+    }
+
+    /// [1,2,3,4] ---> [2,1,4,3] swap adjacent nodes
+    public ListNode swapPairs(ListNode head) {
+
+        ListNode dummy = new ListNode(-1);
+        dummy.next  = head;
+
+        ListNode prev = dummy;
+        while(prev.next != null && prev.next.next!=null) {
+            ListNode first = prev.next;
+            ListNode second = first.next;
+
+            first.next = second.next;
+            second.next = first;
+            prev.next = second;
+            prev = first; /// -- move prev to interchanged new second one62
+        }
+        return dummy.next;
+
     }
 
     public static void main(String[] args) {

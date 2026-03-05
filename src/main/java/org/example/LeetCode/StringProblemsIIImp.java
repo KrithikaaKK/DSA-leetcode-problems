@@ -1,9 +1,12 @@
 package org.example.LeetCode;
 
+import com.sun.jdi.IntegerValue;
+
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Stack;
 
-public class StringProblemsIII {
+public class StringProblemsIIImp {
 
     public static int romanToInt(String s) {
 
@@ -38,6 +41,7 @@ public class StringProblemsIII {
         return total;
     }
 
+    /// 11 -> 21 - count + then the digit 21 -> 1211
     public static String countAndSay(int n) {
 
         StringBuilder sb = new StringBuilder();
@@ -69,9 +73,44 @@ public class StringProblemsIII {
     return sb.toString();
     }
 
+    public static String decodeString(String s) {
+
+
+        Stack<Integer> st1 = new Stack<>();
+        Stack<StringBuilder> st2 = new Stack<>();
+
+        StringBuilder sb = new StringBuilder();
+        int n =0;
+        for(char c : s.toCharArray()) {
+            if(Character.isDigit(c)){
+                n = n * 10 + (c - '0');
+            }
+            else if (c == '['){
+                st1.push(n);
+                n =0;
+                st2.push(sb);
+                sb = new StringBuilder();
+            }
+            else if (c == ']'){
+                StringBuilder temp = sb; //c
+                sb = st2.pop(); //a
+                int m = st1.pop();
+                while(m-->0){
+                    sb.append(temp); //acc
+                }
+            }
+            else {
+                sb.append(c);
+            }
+        }
+        return sb.toString();
+
+    }
+
     public static void main(String[] args){
         //System.out.println(romanToInt("III"));
-        System.out.println(countAndSay(4));
+        //System.out.println(countAndSay(4));
+        System.out.println(decodeString("3[a]2[c]"));
 
     }
 }

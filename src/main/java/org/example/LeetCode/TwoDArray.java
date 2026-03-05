@@ -112,6 +112,33 @@ public class TwoDArray {
 
     }
 
+    /// return true if the target present
+    /// the row & col were sorted seperately , not globally sorted
+    /// used top-right elimination (start with top right corner element)
+    public static boolean searchMatrix(int[][] matrix, int target) {
+
+        int m =0, n = matrix[0].length-1;
+
+        while(m<matrix.length && n>0){
+            int num = matrix[m][n];
+            System.out.println(num);
+
+            if(num==target) {
+                return true;
+            }
+            else if (num>target){
+                n--;
+            }
+            else {
+                m++;
+            }
+        }
+        return false;
+
+
+
+    }
+
     public static void main(String[] args) {
 //        System.out.println(Arrays.deepToString(rotateImage(new int[][]{
 //
@@ -124,11 +151,13 @@ public class TwoDArray {
         int[][] walls = {{0,1}, {2,2}, {1,4}};
 
         //System.out.println(countUnguarded(m, n, guards, walls));
-        System.out.println(spiralOrder(new int[][]{
+//        System.out.println(spiralOrder(new int[][]{
+//
+//                {1, 3, 5},
+//                {7, 9, 11},
+//                {13, 15, 17}}));
 
-                {1, 3, 5},
-                {7, 9, 11},
-                {13, 15, 17}}));
+        System.out.println(searchMatrix(new int[][]{{-5}},-5));
 
 
     }

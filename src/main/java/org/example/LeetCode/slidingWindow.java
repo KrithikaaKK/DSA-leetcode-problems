@@ -259,7 +259,7 @@ public class slidingWindow {
     }
 
     /// return the longest subarray by obtaining k opertions of
-    /// replacement
+    /// replacement ABBAB
     public static int characterReplacement(String s, int k) {
         int start=0,maxCount=0,maxLen =0;
         int[] chars = new int[128];
@@ -267,7 +267,7 @@ public class slidingWindow {
 
             maxCount = Math.max(maxCount,++chars[s.charAt(end) - 'A']);
 
-            while((end-start+1) - maxCount>k) {
+            while((end-start+1) - maxCount>k) { ///  window length -- right - left + 1 ; windowlen - max > k --- shrink the window
                 chars[s.charAt(start) - 'A']--;
                 start++;
             }

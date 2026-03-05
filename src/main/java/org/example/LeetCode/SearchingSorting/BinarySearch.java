@@ -228,13 +228,13 @@ public class BinarySearch {
 //                        {13, 15, 17}
 //
 //        },18));
-        System.out.println(KthSmallestElementInMatrix(new int[][]{
-
-                {1, 3, 5}, //row = 3,col = 3 high = 8 mid = 4 r=4/3=1 c=4%3=1,
-                {7, 9, 11}, // low = 4+1=5 , mid = 6
-                {13, 15, 17}
-
-        },7));
+//        System.out.println(KthSmallestElementInMatrix(new int[][]{
+//
+//                {1, 3, 5}, //row = 3,col = 3 high = 8 mid = 4 r=4/3=1 c=4%3=1,
+//                {7, 9, 11}, // low = 4+1=5 , mid = 6
+//                {13, 15, 17}
+//
+//        },7));
 //        System.out.println(searchMatrix(new int[][]{
 //
 //                {1}, //row = 3,col = 3 high = 8 mid = 4 r=4/3=1 c=4%3=1,
@@ -245,7 +245,7 @@ public class BinarySearch {
 //        System.out.println(findPeakElement(new int[]{1,2,3,1,5}));
       //  System.out.println(Arrays.toString(firstAndLastOccOfTarget(new int[]{5, 7, 7,8,8,  10}, 7)));
       //  System.out.println(searchInsert(new int[]{1,2,4,5,7,9},8));
-       // System.out.println(sqrtOfNumber(24));
+        System.out.println(sqrtOfNumber(24));
        // System.out.println(isPerfectSquare(26));
         //System.out.println(peakIndexInMountainArray(new int[]{0,1,3,1,0}));
 
