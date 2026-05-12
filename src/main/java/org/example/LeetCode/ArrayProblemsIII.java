@@ -265,6 +265,27 @@ public class ArrayProblemsIII {
 
     }
 
+    /// idea imp
+    /// return the number which is repeated n/2 , also -- only one element is repeated
+    public static int repeatedNTimes(int[] nums) {
+
+
+        Set<Integer> set = new HashSet<>();
+
+        for (int num : nums) {
+
+            if (!set.add(num)) {
+                return num;
+            }
+
+
+        }
+        return 0;
+
+
+
+    }
+
 
 
 

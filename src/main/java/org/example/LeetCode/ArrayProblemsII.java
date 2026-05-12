@@ -46,7 +46,7 @@ public class ArrayProblemsII {
      */
     public static int[] nextPermutation(int[] nums){
         int length = nums.length;
-        int i = length-2;
+        int i = length-2; // middle one
         while(i>=0 && nums[i]>nums[i+1]){
             i--;
         }

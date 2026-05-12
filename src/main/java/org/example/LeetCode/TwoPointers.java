@@ -37,8 +37,8 @@ public class TwoPointers {
             while(second<third) {
                 sum = nums[first] + nums[second] +  nums[third];
                 if(sum<0) ++second;
-                if(sum>0) --third;
-                else if(sum==0) {
+                else if(sum>0) --third;
+                else {
                     result.add(List.of(nums[first],nums[second],nums[third]));
                     while(second<third && nums[second]==nums[second+1]) second++;
                     while(second<third && nums[third] == nums[third-1]) third--;
@@ -177,6 +177,8 @@ public class TwoPointers {
         return res;
     }
 
+    ///yengaa if use pananu..yenga else if use pananummmmmm
+
     public static int maxProfit(int[] prices) {
         int buy =prices[0],profit = 0;
 
@@ -193,6 +195,48 @@ public class TwoPointers {
 
     }
 
+    /// container with most water -- min(left,right)(length) * (right-left)(width)
+    public static int maxArea(int[] height) {
+
+        int left = 0, right = height.length-1;
+
+        int maxArea = 0;
+        while(left<right) {
+            int area = Math.min(height[left],height[right]) * (right - left);
+            maxArea = Math.max(maxArea,area);
+
+            if(height[left] < height[right]) left++;
+            else right++;
+        }
+
+        return maxArea;
+
+
+
+
+
+    }
+
+    public static int[] sortedSquares(int[] nums) {
+
+        int[] result = new int[nums.length];
+
+        int left=0,right=nums.length-1;
+        int index = nums.length-1;
+
+        while(left<right) {
+            if(Math.abs(nums[left]) < Math.abs(nums[right])){
+                result[index--] = nums[right] * nums[right];
+                right--;
+            }
+            else {
+                result[index--] = nums[left] * nums[left];
+                left++;
+            }
+        }
+        return result;
+    }
+
 
 
     public static void main(String[] args) {
@@ -205,6 +249,8 @@ public class TwoPointers {
         //System.out.println(majorityElement(new int[]{3,2,3}));
         //System.out.println(majorityElementNByThree(new int[]{1,2}));
 
-        System.out.println(maxProfit(new int[]{7,1,5,3,6,4}));
+//        System.out.println(maxProfit(new int[]{7,1,5,3,6,4}));
+//        System.out.println(maxArea(new int[]{1,8,4,5}));
+        System.out.println(Arrays.toString(sortedSquares(new int[]{-1, -7, 0, 5, 8, 10})));
     }
 }

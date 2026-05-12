@@ -7,13 +7,15 @@ import java.util.concurrent.Callable;
 
 public class test {
 
-    static void print(){
-        System.out.println(" 45");
-    }
+
+    public static final Object resource1 = new Object();
+    public static final Object resource2 = new Object();
+
+
+
 
     public static void main(String[] args) throws InterruptedException {
-        Optional<String> op = Optional.of("Heloo");
-        System.out.println(op.isPresent());
+
 
     }
 

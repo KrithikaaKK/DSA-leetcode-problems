@@ -177,6 +177,47 @@ public class slidingWindow {
             return s.substring(start_idx, start_idx + min_len);
         }
 
+        /// optimized version fo above -- to get the smallest substring of s containing all chars of t
+    public static String minWindowOp (String s, String t) {
+
+        int[] tCount = new int[128];
+
+        int start =0,required = t.length();
+        int minStart=0;
+        int minLength=Integer.MAX_VALUE;
+
+        for(char c : t.toCharArray()) {
+            tCount[c]++;
+        }
+
+        for(int end =0;end<s.length();end++) {
+            char curr = s.charAt(end);
+            if(tCount[curr]>0) {
+                required--;
+            }
+            tCount[curr]--;
+
+            /// once all the char req were got - have to record that length
+            while(required==0) {
+                int currLen = end-start+1;
+                if(currLen < minLength) { //yen min func use panala na..have to record the starting point too
+                    minLength = currLen;
+                    minStart = start;
+                }
+                char leftChar = s.charAt(start);
+                tCount[leftChar]++;
+                if(tCount[leftChar]>0){
+                    required++;
+                }
+                start++;
+            }
+
+        }
+        System.out.println("s.."+s.substring(minStart,minLength) + "len.."+ minLength + " " + minStart);
+        if(minLength==Integer.MAX_VALUE) return "";
+        return s.substring(minStart , minStart+minLength); /// minst -  3, minle - 4 , 3 - 4 - single letter , 3 to 3+4 -- 3 - 7 - BECA
+    }
+
     public static int minSubarraySumLen (int target,int[] nums) {
 
         int len = Integer.MAX_VALUE,windowSum = 0,left=0;
@@ -369,6 +410,37 @@ public class slidingWindow {
     }
 
 
+    /// for every window of size k record the maximum element
+    /// oru oru window laeum oru oru max entry
+    /// dequeue - use panirupanga
+    public int[] maxSlidingWindowOp(int[] nums,int k) {
+        int[] result = new int[nums.length-k+1];
+
+        Deque<Integer> deque = new ArrayDeque<>();
+
+        for(int i=0;i<nums.length;i++) {
+
+            if(!deque.isEmpty() && deque.pollFirst()<i-k+1) { /// outside the window
+                deque.pollFirst();
+            }
+
+            while(!deque.isEmpty() && nums[deque.peekLast()]<=nums[i]){ /// remove smaller ones
+                deque.pollLast();
+            }
+
+            deque.offerLast(nums[i]);
+
+            if(i >= k-1){
+                result[i-k+1] = nums[deque.peekFirst()];
+            }
+
+
+        }
+        return result;
+
+
+    }
+
 
 
 
@@ -382,6 +454,7 @@ public class slidingWindow {
         //System.out.println(PermutationCheck("adc","dcda"));
        // System.out.println(characterReplacement("ABABB",1));
        // System.out.println(Arrays.toString(maxSlidingWindow(new int[]{1,3,-1,-3,5,3,6,7},3)));//3,3,3,4,5
-        System.out.println(Arrays.toString(findXSum(new int[]{1,1,2,2,3,4,2,3}, 6, 2)));
+       // System.out.println(Arrays.toString(findXSum(new int[]{1,1,2,2,3,4,2,3}, 6, 2)));
+        System.out.println(minWindowOp("ADOBECANCDFBANC","ABC"));
     }
 }

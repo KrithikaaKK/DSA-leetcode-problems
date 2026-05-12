@@ -112,6 +112,23 @@ public class Main {
         return result;
     }
 
+    /// reverse the given number - 123 -> 321 , -345 -> -543
+    public static int reverseNumber (int num) {
+
+        int result = 0,tail,newResult;
+        while(num!=0){
+             tail = num % 10;
+             newResult = result * 10 + tail;
+            if((newResult - tail)/10 != result) {
+                return 0;
+            }
+            result = newResult;
+            num = num /10;
+        }
+        return result;
+
+    }
+
 
 
 
@@ -138,7 +155,8 @@ public class Main {
         System.out.println(lexiographicString("thgyfh",2,6));
 
         */
-        System.out.println(lexicographicallyLargestString("dbca",2));
+       // System.out.println(lexicographicallyLargestString("dbca",2));
+        System.out.println(reverseNumber(-564));
 
         }
 }

@@ -2,9 +2,7 @@ package org.example.LeetCode;
 
 import com.sun.jdi.IntegerType;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 public class PrefixSum {
 
@@ -13,23 +11,21 @@ public class PrefixSum {
 
     public static int subarraySum(int[] nums, int k) {
         int count=0;
-        for(int i=1;i<nums.length;i++) {
-            nums[i] += nums[i-1];
-            System.out.println(nums[i]);
-        }
-        System.out.println(Arrays.toString(nums));
 
-        for(int i=0;i<nums.length;i++) {
-            for(int j= i+1;j<nums.length;j++){
-                System.out.println(nums[j]+ " " +nums[i]);
-                if(nums[j] - nums[i] == k){
-                    count++;
-                }
+        Map<Integer,Integer> sumCount = new HashMap<>();
+        sumCount.put(0,1);
+
+        int prefixSum = 0;
+        for(int num : nums){
+            prefixSum += num;
+            int n = prefixSum - k;
+            if(sumCount.containsKey(n)) {
+                count += sumCount.get(n);
             }
-            if(nums[i]==k){
-                count++;
-            }
+            sumCount.put(prefixSum,sumCount.getOrDefault(prefixSum,0)+1);
         }
+
+
         return count;
     }
 

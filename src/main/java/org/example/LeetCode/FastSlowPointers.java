@@ -33,7 +33,7 @@ public class FastSlowPointers {
         int slow = nums[0];
         int fast = nums[0];
 
-        // Step 1: Detect cycle
+        // Step 1: Detect cycle 1 3 4 2 2
         do {
             slow = nums[slow];          // move by 1
             fast = nums[nums[fast]];    // move by 2
@@ -51,6 +51,7 @@ public class FastSlowPointers {
         return slow; // or fast, they are equal
     }
 
+    /// jvm -- > main() -> spring.run() - creates application context -  bean created
 
 
 
